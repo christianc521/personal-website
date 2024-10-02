@@ -3,7 +3,16 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+
+
+const posts = (await getCollection('projects')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
 ---
+
+
 
 <!doctype html>
 <html lang="en">
@@ -17,8 +26,23 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<h1 class="text-xl font-large text-black-600 mb-2">Hi, thanks for joining me!</h1>
 				<div class="text-sm">
 					<p >I'm a software engineer based out of Chicago, Illinois.</p>
-					<p> When I'm not behind the computer, I'm probably working on 3D prints or doomscrolling.</p>
+					<p> When I'm not behind the computer, I'm probably working on 3D prints.</p>
 				</div>
+				<section>
+					<ul>
+						{
+							posts.map((post) => (
+								<li class="mb-8">
+									<a href={`${post.slug}/`}>
+										<h1 class="text-xl font-bold hover:underline">{post.data.title}</h1>
+										<p class="mb-2 text-gray-600">{post.data.description}</p>
+										<a href={`${post.slug}/`} class="text-blue-600 hover:text-blue-500 font-medium">read this article</a>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</section>
 			</div>
 			
 		</main>

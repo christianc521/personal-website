@@ -32,6 +32,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
+						<img class="h-auto max-w-full" src={heroImage} alt="textures" />
 						<hr />
 					</div>
 					<slot />
@@ -41,3 +42,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Footer />
 	</body>
 </html>
+
+<script>
+	import mediumZoom from 'medium-zoom';
+	
+	mediumZoom('img', {
+	  margin: 16,
+	  background: "#00000095",
+	});
+  </script>
