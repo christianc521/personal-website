@@ -24,20 +24,28 @@ const posts = (await getCollection('projects')).sort(
 		<main>
 			<div class="mb-4">
 				<h1 class="text-xl font-large text-black-600 mb-2">Hi, thanks for joining me!</h1>
-				<div class="text-sm">
+				<div class="text-sm mb-2">
 					<p >I'm a software engineer based out of Chicago, Illinois.</p>
-					<p> When I'm not behind the computer, I'm probably working on 3D prints.</p>
+					<p> When I'm not behind the computer, I'm probably adding to my overflowing collection of hobbies or walking up a mountain.</p>
 				</div>
+				<hr class="solid mb-4">
 				<section>
 					<ul>
 						{
 							posts.map((post) => (
 								<li class="mb-8">
-									<a href={`${post.slug}/`}>
-										<h1 class="text-xl font-bold hover:underline">{post.data.title}</h1>
-										<p class="mb-2 text-gray-600">{post.data.description}</p>
-										<a href={`${post.slug}/`} class="text-blue-600 hover:text-blue-500 font-medium">read this article</a>
-									</a>
+									<div class="max-w-prose m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+										<a href="#">
+											<img class="rounded-t-lg" src={post.data.heroImage} alt="" />
+										</a>
+										<div class="p-5">
+											<a href="#">
+												<h5 class="mb-2 text-2xl font-bold tracking-tight text-black-200 dark:text-white">{post.data.title}</h5>
+											</a>
+											<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.data.description}</p>
+											<a href={`${post.slug}/`} class="text-blue-600 hover:text-blue-500 font-medium">read about this project!</a>
+										</div>
+									</div>
 								</li>
 							))
 						}

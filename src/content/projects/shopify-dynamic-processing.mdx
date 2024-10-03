@@ -1,0 +1,20 @@
+---
+title: 'Shopify Dynamic Processing'
+description: 'Shopify application that dynamically displays a product processing period based on assembly time and amount of unfulfilled orders.'
+pubDate: 'Sept 20 2024'
+heroImage: '/shopify-admin.JPG'
+---
+
+Over this past summer, I've been working a personal project that combines lamps with embedded development using motorized shades _(that's for a later post)_. I knew that I would eventually want to sell these, but was worried about the varying processing times for these as each lamp would need to be printed, flashed, and assembled. The most popular e-commerce platform, [Shopify](https://www.shopify.com/), does not provide the functionality for merchants to provide custom processing times to list on product pages. After doing market research, I found that many shops face this issue as many products sold from small buisnesses are handmade and made to order. Seeing this gap in the market, I decided to develop my own [embedded Shopify application](https://shopify.dev/docs/apps/build) to tackle this common issue.
+
+Through a merchant view, they would install the app from the Shopify app store and access the actions from the admin panel. From here, all the merchant would have to do is set the assembly time in hours for each product. In the page builder, an [app block](https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/apps#app-blocks) displaying the current processing time would be available. The text in the block dynamically changes based on the amount of unfilled orders at the time the page is opened.  
+
+The frontend is built using the full stack web framework, [Remix](https://remix.run/). I needed to develop an API to communicate with Shopify services, so I decided to use [Prisma](https://www.prisma.io/) to store session data and [GraphQL](https://graphql.org/) for all queries and mutations. Webhooks triggered all database modifications, allowing all backend changes to occur automatically. My API authenticates with each individual shop admin session before any database changes are made. 
+
+![App Lifecycle](/shopify-processing-lifecycle.JPG)
+
+Shopify uses the robust template language, [Liquid](https://shopify.dev/docs/api/liquid), that can dynamically insert information, including product metafields, to display static content within a webpage. I used this to load the current processing time for the product listed on the page.
+
+![Product Page](/test-product-page.jpg)
+
+Currently, this application is being hosted locally as the process to submit an app to the app store is a bit lengthly, but the completed project source code [can be found on my GitHub](https://github.com/christianc521/shopify-dynamic-processing-time).
