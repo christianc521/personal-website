@@ -35,11 +35,11 @@ const posts = (await getCollection('projects')).sort(
 							posts.map((post) => (
 								<li class="mb-8">
 									<div class="max-w-prose m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-										<a href="#">
+										<a href={`${post.slug}/`}>
 											<img class="rounded-t-lg" src={post.data.heroImage} alt="" />
 										</a>
 										<div class="p-5">
-											<a href="#">
+											<a href={`${post.slug}/`}>
 												<h5 class="mb-2 text-2xl font-bold tracking-tight text-black-200 dark:text-white">{post.data.title}</h5>
 											</a>
 											<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.data.description}</p>
